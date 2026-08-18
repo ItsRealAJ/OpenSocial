@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   Design tokens
+   ---------------------------------------------------------------------------
+   These are X's own "Lights out" theme values, not invented ones. A vertical
+   reels feed is a dark surface by nature, so the whole app is locked to this
+   one theme rather than offering a light mode that the feed would fight.
+   =========================================================================== */
+@theme {
+  --color-ground: #000000;        /* page background */
+  --color-surface: #16181c;       /* cards, sheets, inputs */
+  --color-surface-2: #202327;     /* pressed / raised surface */
+  --color-hairline: #2f3336;      /* every divider in the app */
+  --color-ink: #e7e9ea;           /* primary text */
+  --color-ink-muted: #71767b;     /* timestamps, handles, meta */
+  --color-accent: #1d9bf0;        /* X blue: links, primary buttons, bookmark */
+  --color-accent-press: #1a8cd8;
+  --color-like: #f91880;          /* X pink */
+  --color-repost: #00ba7c;        /* X green */
+  --color-danger: #f4212e;        /* X red: block, report */
+
+  --font-sans: var(--font-inter), "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* One radius system: 16px for surfaces, full pill for anything you press. */
+  --radius-surface: 16px;
+}
+
+html {
+  color-scheme: dark;
+  background: var(--color-ground);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+/* --- Interaction states -------------------------------------------------- */
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+input,
+textarea {
+  caret-color: var(--color-accent);
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* --- Scrollbars ---------------------------------------------------------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-hairline) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Hide the scrollbar on the snap feed only. Elsewhere it stays visible. */
+.feed-scroller {
+  scrollbar-width: none;
+}
+
+.feed-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Range inputs, used heavily on /settings/algorithm ------------------- */
+
+input[type="range"] {
+  appearance: none;
+  width: 100%;
+  height: 22px;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-hairline);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  transition: transform 120ms ease;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-hairline);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+/* Negative-weight sliders read as damage, so their thumb is red. */
+input[type="range"].is-negative::-webkit-slider-thumb {
+  background: var(--color-danger);
+}
+
+input[type="range"].is-negative::-moz-range-thumb {
+  background: var(--color-danger);
+}
+
+/* --- Motion -------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
