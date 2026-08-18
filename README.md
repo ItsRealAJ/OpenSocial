@@ -1,17 +1,6 @@
-<!--
-  LOGO: save your image to .github/assets/logo-light.png (and logo-dark.png for
-  a version that reads on GitHub's dark theme), then paste this block in above
-  the heading. It is parked here rather than live so the README does not show a
-  broken image until the files exist.
-
-  <p align="center">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.png">
-      <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.png">
-      <img alt="Open Social" src=".github/assets/logo-light.png" width="180">
-    </picture>
-  </p>
--->
+<p align="center">
+  <img alt="Open Social" src=".github/assets/logo-light.png" width="520">
+</p>
 
 <h1 align="center">Open Social</h1>
 
